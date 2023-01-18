@@ -3,6 +3,7 @@
 #import "RNKeyEvent.h"
 
 NSString* const onKeyUpEvent = @"onKeyUp";
+NSString* const onKeyDownEvent = @"onKeyDown";
 
 @implementation RNKeyEvent
 
@@ -38,6 +39,7 @@ RCT_EXPORT_MODULE();
 - (void)sendKeyEvent:(NSString *)keyString {
     if (self.hasListeners && self.bridge) {
         [super sendEventWithName:onKeyUpEvent body:@{@"pressedKey": keyString}];
+        [super sendEventWithName:onKeyDownEvent body:@{@"pressedKey": keyString}];
     }
 }
 
@@ -47,6 +49,7 @@ RCT_EXPORT_MODULE();
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[onKeyUpEvent];
+    return @[onKeyDownEvent];
 }
 
 // Note: startObserving will be called when this module's first listener is added.
