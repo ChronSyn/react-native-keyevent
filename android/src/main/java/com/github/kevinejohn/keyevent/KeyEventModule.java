@@ -27,8 +27,30 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
         return instance;
     }
 
+    public boolean checkSystemKeys(int keyCode) {
+        if (
+            keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
+            keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
+            keyCode == KeyEvent.KEYCODE_VOLUME_MUTE
+            // || keyCode == KeyEvent.KEYCODE_WAKEUP
+            // || keyCode == KeyEvent.KEYCODE_POWER
+            // || keyCode == KeyEvent.KEYCODE_CAMERA
+            // || keyCode == KeyEvent.KEYCODE_FOCUS
+            // || keyCode == KeyEvent.KEYCODE_WINDOW
+        ) {
+            // Do not handle the key event
+            return false;
+        }
+        return true;
+    }
+
     public void onKeyDownEvent(int keyCode, KeyEvent keyEvent) {
         if (!mReactContext.hasActiveCatalystInstance()) {
+            return;
+        }
+
+        if (checkSystemKeys(keyCode) == false) {
+            // Do not handle the key event
             return;
         }
 
@@ -43,6 +65,11 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
             return;
         }
 
+        if (checkSystemKeys(keyCode) == false) {
+            // Do not handle the key event
+            return;
+        }
+
         if (mJSModule == null) {
             mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
         }
@@ -53,11 +80,15 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
         if (!mReactContext.hasActiveCatalystInstance()) {
             return;
         }
+
+        if (checkSystemKeys(keyCode) == false) {
+            // Do not handle the key event
+            return;
+        }
         
         if (mJSModule == null) {
             mJSModule = mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
         }
-
 
         mJSModule.emit("onKeyMultiple", getJsEventParams(keyCode, keyEvent, repeatCount));
     };
