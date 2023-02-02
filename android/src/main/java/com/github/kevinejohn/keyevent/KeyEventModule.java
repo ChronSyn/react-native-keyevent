@@ -40,7 +40,7 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
             return;
         }
 
-        if (checkSystemKeys(keyCode) == false) {
+        if (checkSystemKeys(keyCode) == true) {
             // Do not handle the key event
             return;
         }
@@ -57,7 +57,7 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
             return;
         }
 
-        if (checkSystemKeys(keyCode) == false) {
+        if (checkSystemKeys(keyCode) == true) {
             // Do not handle the key event
             return;
         }
@@ -73,7 +73,7 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
             return;
         }
 
-        if (checkSystemKeys(keyCode) == false) {
+        if (checkSystemKeys(keyCode) == true) {
             // Do not handle the key event
             return;
         }
