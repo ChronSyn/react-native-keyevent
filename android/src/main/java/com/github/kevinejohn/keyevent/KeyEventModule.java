@@ -48,7 +48,7 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
 
     public void hideSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) mReactContext.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 
     public void onKeyDownEvent(int keyCode, KeyEvent keyEvent) {
