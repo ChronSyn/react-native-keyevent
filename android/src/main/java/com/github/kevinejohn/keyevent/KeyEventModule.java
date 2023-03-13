@@ -8,6 +8,8 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.bridge.WritableMap;
 
 import android.view.KeyEvent;
+import android.app.Activity;
+import android.view.inputmethod.InputMethodManager;
 
 /**
  * Created by Kevin Johnson on 8/15/16.
@@ -42,6 +44,11 @@ public class KeyEventModule extends ReactContextBaseJavaModule {
             return false;
         }
         return true;
+    }
+
+    public void hideSoftKeyboard() {
+        InputMethodManager imm = (InputMethodManager) mReactContext.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
     }
 
     public void onKeyDownEvent(int keyCode, KeyEvent keyEvent) {
